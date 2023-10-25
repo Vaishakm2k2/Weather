@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body class="bg-black">
+        <div class="container">
+            <div class="row">
+                <div class="image">
+                    <img class="opacity-75" src="https://images.ctfassets.net/hrltx12pl8hq/6TIZLa1AKeBel0yVO7ReIn/1fc0e2fd9fcc6d66b3cc733aa2547e11/weather-images.jpg?fit=fill&w=1200&h=630" alt="">
+                    <div class="formw">
+                        <div class="search">
+                            <input type="text" class="bg-transparent" placeholder="Enter city name" spellcheck="false">
+                            <button id="btn" class="btn mb-3">Search</button>
+                        </div>
+                        <div class="error">
+                            <p>Invalid city name</p>
+                        </div>
+                        <div id="result" class="weather-details">
+                            <h5 id="wh" class="mx-2">Weather-details</h5><br>
+                            <div id="country" class="mx-2"><p><b>Country</b></p>   <p class="country">.</p></div>
+                            <div id="humidity" class="mx-2"><p><b>Humidity</b></p> <p class="humidity">.</p></div>
+                            <div id="wind" class="mx-2"><p><b>Wind Speed</b></p>   <p class="wind">.</p></div>
+                            <div id="pressure" class="mx-2"><p><b>Pressure</b></p> <p class="pressure">.</p></div>
+                        </div>
+                    </div>
+                    <div class="weather">
+                        <h1 class="temp">Temperature</h1>
+                        <h2 class="city">City Name</h2>
+                        <img src="images/clear.png" class="weather-icon" alt="">
+                    </div>
+                    <h5 class="w">Weather</h5>
+                </div>
+            </div>
+        </div>
+</body>
+<script>
+//https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+//e427cecac0d668440d5797500afe6557
+ 
+ const apiKey = "e427cecac0d668440d5797500afe6557"
+ const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
+
+ const searchBox = document.querySelector(".search input");
+ const searchBtn = document.querySelector(".search button");
+ const weatherIcon = document.querySelector(".weather-icon");
+ const weatherImage = document.querySelector(".opacity-75")
+
+async function checkWeather(city){
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=${apiKey}`);
+
+    if(response.status == 404){
+        document.querySelector(".error").style.display = "block";
+        
+        document.querySelector(".city").innerHTML = "City Name";
+        document.querySelector(".temp").innerHTML = "Temperature";
+        document.querySelector(".humidity").innerHTML = ".";
+        document.querySelector(".wind").innerHTML = ".";
+        document.querySelector(".country").innerHTML = ".";
+        document.querySelector(".pressure").innerHTML = ".";
+        document.querySelector(".w").innerHTML = "Weather";
+
+        weatherIcon.src = "images/clear.png"
+
+        weatherImage.src = "https://images.ctfassets.net/hrltx12pl8hq/6TIZLa1AKeBel0yVO7ReIn/1fc0e2fd9fcc6d66b3cc733aa2547e11/weather-images.jpg?fit=fill&w=1200&h=630"
+    }
+    else{
+        var data = await response.json();
+
+    console.log(data);
+
+    document.querySelector(".city").innerHTML = data.name;
+    document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+    document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+    document.querySelector(".wind").innerHTML = data.wind.speed + "kh/h";
+    document.querySelector(".country").innerHTML = data.sys.country;
+    document.querySelector(".pressure").innerHTML = data.main.pressure;
+    document.querySelector(".w").innerHTML = data.weather[0].description;
+
+    if(data.weather[0].main == "Clouds"){
+        weatherIcon.src = "images/clouds.png"
+        weatherImage.src = "https://c.wallhere.com/photos/f4/e5/road_mountains_landscape-125837.jpg!d"
+    }
+    else if(data.weather[0].main == "Clear"){
+        weatherIcon.src = "images/clear.png"
+        weatherImage.src = "https://wallpaperaccess.com/full/3364029.jpg"
+    }
+    else if(data.weather[0].main == "Rain"){
+        weatherIcon.src = "images/rain.png"
+        weatherImage.src = "https://cdn.wallpapersafari.com/29/54/7zcTjw.jpg"
+    }
+    else if(data.weather[0].main == "Drizzle"){
+        weatherIcon.src = "images/drizzle.png"
+    }
+    else if(data.weather[0].main == "Mist"){
+        weatherIcon.src = "images/mist.png"
+        weatherImage.src = "https://static.vecteezy.com/system/resources/thumbnails/007/535/057/original/timelapse-of-rainy-weather-in-mountains-misty-fog-blowing-over-pine-tree-forest-after-rain-outdoors-video.jpg"
+    }
+    else if(data.weather[0].main == "Snow"){
+        weatherIcon.src = "images/snow.png"
+        weatherImage.src = "https://wallpaperaccess.com/full/419101.jpg"
+    }
+
+    document.querySelector(".error").style.display = "none";
+
+    }
+
+   
+
+}
+
+searchBtn.addEventListener("click", () => {
+    checkWeather(searchBox.value);
+}); 
+
+
+
+
+</script>
+</html>
