@@ -11,7 +11,7 @@
         <div class="container">
             <div class="row">
                 <div class="image">
-                    <img class="opacity-75" src="https://wallpapers.com/images/hd/weather-scenarios-collage-dbk9c5n23l7e5fgb.jpg" alt="">
+                    <img class="opacity-75" src="./images/weathers.jpg" alt="">
                     <div class="formw">
                         <div class="search">
                             <input type="text" class="bg-transparent" placeholder="Enter city name" spellcheck="false">
@@ -66,7 +66,7 @@ async function checkWeather(city){
 
         weatherIcon.src = "images/clear.png"
 
-        weatherImage.src = "https://wallpapers.com/images/hd/weather-scenarios-collage-dbk9c5n23l7e5fgb.jpg"
+        weatherImage.src = "images/weathers.jpg"
     }
     else{
         var data = await response.json();
@@ -83,26 +83,63 @@ async function checkWeather(city){
 
     if(data.weather[0].main == "Clouds"){
         weatherIcon.src = "images/clouds.png"
-        weatherImage.src = "https://c.wallhere.com/photos/f4/e5/road_mountains_landscape-125837.jpg!d"
+        weatherImage.src = "images/cloudsimg.jpg"
     }
     else if(data.weather[0].main == "Clear"){
         weatherIcon.src = "images/clear.png"
-        weatherImage.src = "https://wallpaperaccess.com/full/3364029.jpg"
+        weatherImage.src = "images/clearimg.jpg"
     }
     else if(data.weather[0].main == "Rain"){
         weatherIcon.src = "images/rain.png"
-        weatherImage.src = "https://cdn.wallpapersafari.com/29/54/7zcTjw.jpg"
+        weatherImage.src = "images/rainimg.jpg"
     }
     else if(data.weather[0].main == "Drizzle"){
         weatherIcon.src = "images/drizzle.png"
+        weatherImage.src = "images/drizzleimg.jpg"
     }
     else if(data.weather[0].main == "Mist"){
         weatherIcon.src = "images/mist.png"
-        weatherImage.src = "https://static.vecteezy.com/system/resources/thumbnails/007/535/057/original/timelapse-of-rainy-weather-in-mountains-misty-fog-blowing-over-pine-tree-forest-after-rain-outdoors-video.jpg"
+        weatherImage.src = "images/mistimg.jpg"
     }
     else if(data.weather[0].main == "Snow"){
         weatherIcon.src = "images/snow.png"
-        weatherImage.src = "https://wallpaperaccess.com/full/419101.jpg"
+        weatherImage.src = "images/snowimg.jpg"
+    }
+    else if(data.weather[0].main == "Smoke"){
+        weatherIcon.src = "images/smoke.png"
+        weatherImage.src = "images/smokeimg.jpg"
+    }
+    else if(data.weather[0].main == "Haze"){
+        weatherIcon.src = "images/haze.png"
+        weatherImage.src = "images/hazeimg.jpg"
+    }
+    else if(data.weather[0].main == "Thunderstorm"){
+        weatherIcon.src = "images/thunderstorm.png"
+        weatherImage.src = "images/thunderstormimg.jpg"
+    }
+    else if(data.weather[0].main == "Dust"){
+        weatherIcon.src = "images/dust.png"
+        weatherImage.src = "images/dustimg.jpg"
+    }
+    else if(data.weather[0].main == "Fog"){
+        weatherIcon.src = "images/fog.png"
+        weatherImage.src = "images/fogimg.jpg"
+    }
+    else if(data.weather[0].main == "Sand"){
+        weatherIcon.src = "images/sand.png"
+        weatherImage.src = "images/sandimg.jpg"
+    }
+    else if(data.weather[0].main == "Ash"){
+        weatherIcon.src = "images/ash.png"
+        weatherImage.src = "images/ashimg.jpg"
+    }
+    else if(data.weather[0].main == "Squall"){
+        weatherIcon.src = "images/squall.png"
+        weatherImage.src = "images/squallimg.jpg"
+    }
+    else if(data.weather[0].main == "Tornado"){
+        weatherIcon.src = "images/tornado.png"
+        weatherImage.src = "images/tornadoimg.jpg"
     }
 
     document.querySelector(".error").style.display = "none";
